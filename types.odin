@@ -2,7 +2,7 @@ package glslang
 
 import "core:c"
 
-// glslang_c_shader_types.h
+// ========================================= glslang_c_shader_types.h
 
 Stage :: enum {
     VERTEX,
@@ -113,7 +113,7 @@ Messages_Flag :: enum {
     // COUNT,
 }
 
-Messages_Flags :: bit_set[Messages_Flag]
+Messages_Flags :: bit_set[Messages_Flag; c.int]
 
 Reflection_Options_Flag :: enum {
     // DEFAULT,
@@ -150,7 +150,7 @@ Shader_Options_Flag :: enum {
     // COUNT,
 }
 
-Shader_Options_Flags :: bit_set[Shader_Options_Flag]
+Shader_Options_Flags :: bit_set[Shader_Options_Flag; c.int]
 
 Resource_Type :: enum {
     SAMPLER,
@@ -162,7 +162,12 @@ Resource_Type :: enum {
     // COUNT,
 }
 
-// glslang_c_interface.h
+// ============================================ glslang_c_interface.h
+
+Opaque_Struct :: distinct rawptr
+Shader  :: distinct Opaque_Struct
+Program :: distinct Opaque_Struct
+
 Limits :: struct {
     non_inductive_for_loops                  : c.bool,
     while_loops                              : c.bool,
@@ -176,7 +181,6 @@ Limits :: struct {
 }
 
 Resource :: struct {
-
     max_lights                                    : c.int,
     max_clip_planes                               : c.int,
     max_texture_units                             : c.int,
