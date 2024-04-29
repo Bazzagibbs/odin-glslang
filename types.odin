@@ -62,13 +62,13 @@ Target_Client_Version :: enum {
 }
 
 Target_Language_Version :: enum {
-    GLSLANG_TARGET_SPV_1_0 = (1 << 16),
-    GLSLANG_TARGET_SPV_1_1 = (1 << 16) | (1 << 8),
-    GLSLANG_TARGET_SPV_1_2 = (1 << 16) | (2 << 8),
-    GLSLANG_TARGET_SPV_1_3 = (1 << 16) | (3 << 8),
-    GLSLANG_TARGET_SPV_1_4 = (1 << 16) | (4 << 8),
-    GLSLANG_TARGET_SPV_1_5 = (1 << 16) | (5 << 8),
-    GLSLANG_TARGET_SPV_1_6 = (1 << 16) | (6 << 8),
+    SPV_1_0 = (1 << 16),
+    SPV_1_1 = (1 << 16) | (1 << 8),
+    SPV_1_2 = (1 << 16) | (2 << 8),
+    SPV_1_3 = (1 << 16) | (3 << 8),
+    SPV_1_4 = (1 << 16) | (4 << 8),
+    SPV_1_5 = (1 << 16) | (5 << 8),
+    SPV_1_6 = (1 << 16) | (6 << 8),
     // COUNT = 7,
 }
 
@@ -164,9 +164,10 @@ Resource_Type :: enum {
 
 // ============================================ glslang_c_interface.h
 
-Opaque_Struct :: distinct rawptr
-Shader  :: distinct Opaque_Struct
-Program :: distinct Opaque_Struct
+Handle :: distinct rawptr
+
+Shader  :: distinct Handle
+Program :: distinct Handle
 
 Limits :: struct {
     non_inductive_for_loops                  : c.bool,
@@ -296,7 +297,7 @@ Include_Result :: struct {
 
 Include_Local_Proc  :: #type proc "c" (ctx: rawptr, header_name: cstring, includer_name: cstring, include_depth: c.size_t) -> ^Include_Result
 Include_System_Proc :: #type proc "c" (ctx: rawptr, header_name: cstring, includer_name: cstring, include_depth: c.size_t) -> ^Include_Result
-Free_Include_Result_Proc :: #type proc "c" (ctx: rawptr, result: ^Include_Result) -> c.int
+Free_Include_Result_Proc :: #type proc "c" (ctx: rawptr, result: ^Include_Result) -> c.int // b32?
 
 Include_Callbacks :: struct {
     include_system      : Include_System_Proc,
@@ -315,8 +316,8 @@ Input :: struct {
     code                              : cstring,
     default_version                   : c.int,
     default_profile                   : Profile,
-    force_default_version_and_profile : c.int,
-    forward_compatible                : c.int,
+    force_default_version_and_profile : b32,
+    forward_compatible                : b32,
     messages                          : Messages_Flags,
     resource                          : ^Resource,
     callbacks                         : Include_Callbacks,
