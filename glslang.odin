@@ -2,16 +2,19 @@ package glslang
 
 import "core:c"
 
-when ODIN_OS == .Windows do foreign import glslang {
-    "lib/windows/GenericCodeGen.lib",
-    "lib/windows/glslang-default-resource-limits.lib",
-    "lib/windows/glslang.lib",
-    "lib/windows/MachineIndependent.lib",
-    "lib/windows/OSDependent.lib",
-    "lib/windows/SPIRV-Tools-opt.lib",
-    "lib/windows/SPIRV-Tools.lib",
-    "lib/windows/SPIRV.lib",
-    "lib/windows/SPVRemapper.lib",
+when ODIN_OS == .Windows {
+    @(extra_linker_flags="/NODEFAULTLIB:libcmt")
+    foreign import glslang {
+        "lib/windows/GenericCodeGen.lib",
+        "lib/windows/glslang-default-resource-limits.lib",
+        "lib/windows/glslang.lib",
+        "lib/windows/MachineIndependent.lib",
+        "lib/windows/OSDependent.lib",
+        "lib/windows/SPIRV-Tools-opt.lib",
+        "lib/windows/SPIRV-Tools.lib",
+        "lib/windows/SPIRV.lib",
+        "lib/windows/SPVRemapper.lib",
+    }
 }
 when ODIN_OS == .Linux do foreign import glslang {
     "lib/linux/libGenericCodeGen.a",
@@ -36,7 +39,7 @@ when ODIN_OS == .Darwin do foreign import glslang {
     "lib/darwin/libSPVRemapper.a",
 }
 
-@(default_calling_convention="c", link_prefix="glslang")
+@(default_calling_convention="c", link_prefix="glslang_")
 foreign glslang {
     // ===================================== glslang_c_interface.h
     initialize_process                  :: proc() -> b32 ---
