@@ -4,7 +4,7 @@ import "core:c"
 
 // ========================================= glslang_c_shader_types.h
 
-Stage :: enum {
+Stage :: enum c.int {
     VERTEX,
     TESSCONTROL,
     TESSEVALUATION,
@@ -32,27 +32,27 @@ Stage :: enum {
 
 Stage_Mask :: bit_set[Stage]
 
-Source :: enum {
+Source :: enum c.int {
     NONE,
     GLSL,
     HLSL,
     // COUNT,
 }
 
-Client :: enum {
+Client :: enum c.int {
     NONE,
     VULKAN,
     OPENGL,
     // COUNT,
 }
 
-Target_Language :: enum {
+Target_Language :: enum c.int {
     NONE,
     SPV,
     // COUNT,
 }
 
-Target_Client_Version :: enum {
+Target_Client_Version :: enum c.int {
     VULKAN_1_0 = (1 << 22),
     VULKAN_1_1 = (1 << 22) | (1 << 12),
     VULKAN_1_2 = (1 << 22) | (2 << 12),
@@ -61,7 +61,7 @@ Target_Client_Version :: enum {
     // COUNT = 5,
 }
 
-Target_Language_Version :: enum {
+Target_Language_Version :: enum c.int {
     SPV_1_0 = (1 << 16),
     SPV_1_1 = (1 << 16) | (1 << 8),
     SPV_1_2 = (1 << 16) | (2 << 8),
@@ -72,12 +72,12 @@ Target_Language_Version :: enum {
     // COUNT = 7,
 }
 
-Executable :: enum {
+Executable :: enum c.int {
     VERTEX_FRAGMENT,
     FRAGMENT,
 }
 
-Optimization_Level :: enum {
+Optimization_Level :: enum c.int {
     NO_GENERATION,
     NONE,
     SIMPLE,
@@ -85,13 +85,13 @@ Optimization_Level :: enum {
     // COUNT,
 }
 
-Texture_Sampler_Transform_Mode :: enum {
+Texture_Sampler_Transform_Mode :: enum c.int {
     KEEP,
     UPGRADE_TEXTURE_REMOVE_SAMPLER,
     // COUNT,
 }
 
-Messages_Flag :: enum {
+Messages_Flag :: enum c.int {
     // DEFAULT,
     RELAXED_ERRORS,
     SUPPRESS_WARNINGS,
@@ -115,7 +115,7 @@ Messages_Flag :: enum {
 
 Messages_Flags :: bit_set[Messages_Flag; c.int]
 
-Reflection_Options_Flag :: enum {
+Reflection_Options_Flag :: enum c.int {
     // DEFAULT,
     STRICT_ARRAY_SUFFIX,
     BASIC_ARRAY_SUFFIX,
@@ -131,7 +131,7 @@ Reflection_Options_Flag :: enum {
 
 Reflection_Options_Flags :: bit_set[Reflection_Options_Flag]
 
-Profile_Flag :: enum {
+Profile_Flag :: enum c.int {
     // BAD_PROFILE,
     NO_PROFILE,
     CORE_PROFILE,
@@ -142,7 +142,7 @@ Profile_Flag :: enum {
 
 Profile :: bit_set[Profile_Flag]
 
-Shader_Options_Flag :: enum {
+Shader_Options_Flag :: enum c.int {
     // DEFAULT,
     AUTO_MAP_BINDINGS,
     AUTO_MAP_LOCATIONS,
@@ -150,9 +150,9 @@ Shader_Options_Flag :: enum {
     // COUNT,
 }
 
-Shader_Options_Flags :: bit_set[Shader_Options_Flag; c.int]
+Shader_Options_Flags :: bit_set[Shader_Options_Flag]
 
-Resource_Type :: enum {
+Resource_Type :: enum c.int {
     SAMPLER,
     TEXTURE,
     IMAGE,
